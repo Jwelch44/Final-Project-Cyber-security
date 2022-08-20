@@ -19,18 +19,24 @@ us_holidays = holidays.US()
 today = date.today()
 
 @Configuration()
-class %(command.title())Command(ReportingCommand):
-
-
-
+class HolidayCommand(ReportingCommand):
 
     @Configuration()
     def map(self, events):
         # Put your streaming preop implementation here, or remove the map method,
         # if you have no need for a streaming preop
 
-        eval n=relative_time(now(), "-1d@d")
-        pass
+	#Loop over the events
+	for event in events:
+		# Read the _time field since that has the events timestamp
+		# Eventually it would be great to make this configurable, but they can
+		# always manipulate the _time in SPL 
+		event_date_time = event['_time']
+		
+		#Call your function and save it to a new field
+		#Save the result in a field called date_is_holiday
+		# Again it would be great to make this configurable
+		event['date_is_holiday'] = foo(event_date_time)
 
     def reduce(self, events):
         # Put your reporting implementation
