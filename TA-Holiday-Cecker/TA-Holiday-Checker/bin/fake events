@@ -1,0 +1,27 @@
+import calendar
+import datetime
+import holidays # This is the pip holiday list
+import datetime
+
+us_holidays = holidays.country_holidays('US')
+def isHoliday(datetime):
+    # Process this to determine if it really is true
+    # convert from epochtime to datetime then match see if true
+
+    datetime = datetime.datetime.fromtimestamp(epochtime)
+
+    return True
+def isEventOnHoliday(events):
+    for event in events:
+       event['date_isHoliday'] = isHoliday(event['_time'])
+       yield event
+if __name__ == '__main__':
+    events = [
+        {'_time': calendar.timegm(datetime.datetime.strptime('2022-12-25', '%Y-%m-%d').timetuple()), '_raw': 'fake event'},
+        {'_time': calendar.timegm(datetime.datetime.strptime('2022-01-01', '%Y-%m-%d').timetuple()), '_raw': 'fake event 2'},
+        {'_time': calendar.timegm(datetime.datetime.strptime('2022-02-14', '%Y-%m-%d').timetuple()), '_raw': 'fake event 3'},
+        {'_time': calendar.timegm(datetime.datetime.strptime('2022-04-01', '%Y-%m-%d').timetuple()), '_raw': 'fake event 4'},
+        {'_time': calendar.timegm(datetime.datetime.strptime('2022-07-04', '%Y-%m-%d').timetuple()), '_raw': 'fake event 5'},
+    ]
+    for event in isEventOnHoliday(events):
+        print(event)
