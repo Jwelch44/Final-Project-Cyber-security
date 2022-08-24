@@ -22,6 +22,6 @@ class StreamingHolidayCheck(StreamingCommand):
         for record in records:
             record['date_isholiday'] = True
             yield record
-
+ return date in holidays.US(years=2023).keys()
 
 dispatch(StreamingHolidayCheck, sys.argv, sys.stdin, sys.stdout, __name__)
