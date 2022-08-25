@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 import os,sys
+import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 from splunklib.searchcommands import dispatch, StreamingCommand, Configuration, Option, validators
@@ -20,8 +21,8 @@ class StreamingHolidayCheck(StreamingCommand):
 
     def stream(self, records):
         for record in records:
-            record['date_isholiday'] = True
+            print(record['_time'])
+            record['date_isholiday'] = datetime.datetime.utcfromtimestamp(int(record['_time'])).date() in holidays.US(years=2023).keys()
             yield record
- return date in holidays.US(years=2023).keys()
 
 dispatch(StreamingHolidayCheck, sys.argv, sys.stdin, sys.stdout, __name__)
