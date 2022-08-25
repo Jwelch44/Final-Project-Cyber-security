@@ -22,7 +22,8 @@ class StreamingHolidayCheck(StreamingCommand):
 
     def stream(self, records):
         for record in records:
-            record['date_isholiday'] = datetime.datetime.utcfromtimestamp(int(record['time'])).date() in holidays.US(years=2022).keys()
+            #record['date_isholiday'] = datetime.datetime.utcfromtimestamp(int(record['time'])).date() in holidays.US(years=2022).keys()
+            record['date_isholiday'] = '1'
             yield record
 
 dispatch(StreamingHolidayCheck, sys.argv, sys.stdin, sys.stdout, __name__)
