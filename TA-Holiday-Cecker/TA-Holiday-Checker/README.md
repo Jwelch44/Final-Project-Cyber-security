@@ -7,7 +7,7 @@ After installing this app, by copying it to $SPLUNK_HOME/etc/apps and restarting
 
 
 ```
-| makeresults count=365 | streamstats count | eval _time=_time-(count*24*60*60) | holidaycheck | table _time date_isholiday
+| table _time | sort _time | holidaycheck
 ```
 Results:
 
