@@ -20,12 +20,14 @@ class StreamingHolidayCheck(StreamingCommand):
     returns a record with one new field 'date_isholiday'.
     """
 
-    def stream(self, records):
+        def stream(self, records):
         for record in records:
-            record['date_isholiday'] = 'holiday' if datetime.datetime.utcfromtimestamp(int(record['_time'])).date() in [ datetime.date(2022, 1, 1), /
-            datetime.date(2022, 1, 17), datetime.date(2022, 2, 21), datetime.date(2022, 5, 30), datetime.date(2022, 6, 19), datetime.date(2022, 6, 20), /
-            datetime.date(2022, 7, 4), datetime.date(2022, 9, 5), datetime.date(2022, 10, 10), datetime.date(2022, 11, 11), datetime.date(2022, 11, 24), /
-            datetime.date(2022, 12, 25), datetime.date(2022, 12, 26), ] else 'none'
+            record['date_isholiday'] = 'holiday' if datetime.datetime.utcfromtimestamp(int(record['_time'])).date() in [ datetime.date(2022, 1, 1), datetime.date(2022, 1, 17), \
+            datetime.date(2022, 2, 21), datetime.date(2022, 5, 30), datetime.date(2022, 6, 19), datetime.date(2022, 6, 20), datetime.date(2022, 7, 4), datetime.date(2022, 9, 5), \
+            datetime.date(2022, 10, 10), datetime.date(2022, 11, 11), datetime.date(2022, 11, 24), datetime.date(2022, 12, 25), datetime.date(2022, 12, 26), datetime.date(2023, 1, 1), \
+            datetime.date(2023, 1, 2), datetime.date(2023, 1, 16), datetime.date(2023, 2, 20), datetime.date(2023, 5, 29), datetime.date(2023, 6, 19), datetime.date(2023, 7, 4), \
+            datetime.date(2023, 9, 4), datetime.date(2023, 10, 9), datetime.date(2023, 11, 11), datetime.date(2023, 11, 10), datetime.date(2023, 11, 23), datetime.date(2023, 12, 25)] \
+            else 'none'
             yield record
 
 dispatch(StreamingHolidayCheck, sys.argv, sys.stdin, sys.stdout, __name__)
