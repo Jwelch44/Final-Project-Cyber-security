@@ -26,7 +26,11 @@ As an alternative to the above query, since it can have varing _time values you 
 ```
 | makeresults count=5 | streamstats count | eval _time=strptime("12/21/2022 20:27:13", "%m/%d/%Y %H:%M:%S") + (count*24*60*60) | holidaycheck | table _time date_isholiday
 ```
-for search in video demonstration is:
+The log I used in the demostration is above with the same name called:
 
-| table _time | sort _time | holidaycheck
+      Splunk Custom Command Log.txt
+
+The search I used in video demonstration is:
+
+      | table _time | sort _time | holidaycheck
 
